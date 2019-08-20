@@ -24,10 +24,9 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.util.exception.CancelledException;
 
-public class FindJMP extends GhidraScript {
+public class FindByte extends GhidraScript {
 
     public void run() throws Exception {
-//TODO Add User Code Here
     	println("Start searching in " + currentProgram.getName());
     	
     	List<Address> FOUNDBYTES = Scan();
@@ -56,7 +55,8 @@ public class FindJMP extends GhidraScript {
     			println("Error: something wrong with colorizer");
     			return;
     		}
-    		service.setBackgroundColor(FOUNDBYTES.get(i),FOUNDBYTES.get(i),new Color(ColorByte[c][0],ColorByte[c][1],ColorByte[c][2]));
+    		service.setBackgroundColor(FOUNDBYTES.get(i),FOUNDBYTES.get(i),
+			new Color(ColorByte[c][0],ColorByte[c][1],ColorByte[c][2]));
     		println(FOUNDBYTES.get(i).toString());
     	}
     	
@@ -69,8 +69,7 @@ public class FindJMP extends GhidraScript {
 		
 		return foundAddress;
     }
-
-    //
+	
     List<Address> scanForBytes(byte[] searchBytes) {
 		Memory memory = currentProgram.getMemory();
 		MemoryBlock[] blocks = memory.getBlocks();
@@ -99,6 +98,4 @@ public class FindJMP extends GhidraScript {
 		}
 		return foundAddresses;
 	}
-    //
-    
 }
